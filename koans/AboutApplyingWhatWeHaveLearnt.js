@@ -159,7 +159,7 @@ describe("About Applying What We Have Learnt", function() {
         .pop() || undefined;
     };
 
-    expect(largestPrimeFactor(100)).toBe(25);
+    expect(largestPrimeFactor(100)).toBe(5);
     expect(largestPrimeFactor(3)).toBe(undefined);
   
   });
@@ -231,13 +231,33 @@ describe("About Applying What We Have Learnt", function() {
     };
 
     expect(largestThreeDigitsProductsPalindrome()).toEqual(906609);
-    
-
 
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
     
+    var greatestCommonDenominator = function(num1, num2) {
+      var storeMod;
+      while(num2 !== 0) {
+        storeMod = num2;
+        num2 = num1 % num2;
+        num1 = storeMod;
+      }
+      return num1;
+    };
+
+    var leastCommonMultiple = function (num1, num2) {
+      return (num1 * num2 / greatestCommonDenominator(num1, num2));
+    };
+
+    var leastCommonMultipleOfArray = function(array) {
+      return _.reduce(array, function(aggregator, num) {
+        return leastCommonMultiple(aggregator, num);
+      });
+    };
+
+    expect(leastCommonMultipleOfArray(_.range(1, 21))).toEqual(232792560);
+
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
